@@ -7,7 +7,7 @@ import pandas as pd
 
 try:
     import joblib
-except Exception:  # pragma: no cover - optional dependency
+except Exception: 
     joblib = None
 
 LOG = logging.getLogger(__name__)

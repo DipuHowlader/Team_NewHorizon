@@ -57,14 +57,6 @@ Set `VITE_API_BASE_URL` in `frontend/.env` to point to your backend if it isn't 
 
 This repository contains a GitHub Actions workflow (CI) that runs backend tests and performs a frontend build to ensure the project is ready for public demo and contribution.
 
-Showcase checklist (recommended for GitHub presentation)
-
-- [ ] Add a license (e.g., MIT) to the repo.
-- [ ] Add GitHub Actions badge(s) to this README after your first successful CI run.
-- [ ] Add a short GIF or screenshots of the UI in `docs/` and link them here.
-- [ ] Add a `README.md` to the `frontend/` and `exoplanet-api/` folders (done).
-- [ ] Tag a release for the snapshot you want to showcase.
-
 
 ## Project structure
 
@@ -74,7 +66,3 @@ Showcase checklist (recommended for GitHub presentation)
 ## Contributing
 
 Open issues or PRs, and include a short description of what you'd like to change. For major changes, please open an issue first to discuss the design.
-
-## License
-
-Include your preferred license here (MIT, Apache-2.0, etc.).

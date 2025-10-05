@@ -1,6 +1,8 @@
 import json
 from pathlib import Path
 from fastapi import APIRouter, HTTPException
+import math
+import numbers
 
 # Import our Pydantic models
 from models.exoplanet import ExoplanetSummary, ExoplanetDetail
@@ -19,6 +21,42 @@ except Exception:
     EXOPLANETS = {}
 
 
+def _sanitize(obj):
+    """Recursively sanitize objects for JSON encoding.
+
+    - Replace NaN/Inf with 0.0 for numeric values.
+    - Preserve strings and other types.
+    """
+    # Dict
+    if isinstance(obj, dict):
+        return {k: _sanitize(v) for k, v in obj.items()}
+
+    # List / tuple
+    if isinstance(obj, (list, tuple)):
+        return [_sanitize(v) for v in obj]
+
+    # Numbers (including numpy scalars) -> ensure finite float
+    if isinstance(obj, numbers.Number):
+        try:
+            f = float(obj)
+            if math.isfinite(f):
+                return f
+            else:
+                return 0.0
+        except Exception:
+            return 0.0
+
+    # Fallback: try casting to float for numpy-like types
+    try:
+        f = float(obj)
+        if math.isfinite(f):
+            return f
+    except Exception:
+        pass
+
+    return obj
+
+
 @router.get(
     "/",
     response_model=list[ExoplanetSummary],
@@ -30,16 +68,17 @@ async def get_all_exoplanets():
     """
     summary_list = []
     for planet_id, planet_data in EXOPLANETS.items():
-        summary_list.append(
-            ExoplanetSummary(
-                id=planet_data["id"],
-                name=planet_data["name"],
-                distance=planet_data["distance"],
-                mass=planet_data["mass"],
-                detection_confidence=planet_data["detection_confidence"],
-                model_version=planet_data["ai_model_version"],
+            data = _sanitize(planet_data)
+            summary_list.append(
+                ExoplanetSummary(
+                    id=data.get("id"),
+                    name=data.get("name"),
+                    distance=data.get("distance", 0.0),
+                    mass=data.get("mass", 0.0),
+                    detection_confidence=data.get("detection_confidence", 0.0),
+                    model_version=data.get("ai_model_version", "unknown"),
+                )
             )
-        )
     return summary_list
 
 
@@ -56,4 +95,5 @@ async def get_exoplanet_by_id(exoplanet_id: str):
     planet = EXOPLANETS.get(exoplanet_id)
     if not planet:
         raise HTTPException(status_code=404, detail="Exoplanet not found.")
-    return planet
+        # Sanitize nested numeric values before returning
+        return _sanitize(planet)
