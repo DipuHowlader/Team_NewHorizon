@@ -32,8 +32,8 @@ exoai-project
 Include screenshots of the application to help users if the live host is unavailable:
 
 - **Frontend Home Page:**  
-  ![Frontend Screenshot](./screenshots/frontend-home.png)
-
+  ![Home Page:](/screenshots/Screenshot%20(65).png)
+  
 - **API Documentation (/docs):**  
   ![API Docs Screenshot](./screenshots/api-docs.png)
 
