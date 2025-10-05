@@ -1,55 +1,76 @@
 # ExoAI Project
 
 ## Overview
-The ExoAI project is a web application that provides an API for generating and retrieving exoplanet data. It utilizes FastAPI for the backend and a JavaScript framework for the frontend. The application allows users to access synthetic and real exoplanet data, as well as performance metrics for AI models used in exoplanet detection.
+The ExoAI project is a web application that provides an API for generating and retrieving exoplanet data. It utilizes **FastAPI** for the backend and a **JavaScript framework** (React/Vue) for the frontend. The application allows users to access synthetic and real exoplanet data, as well as performance metrics for AI models used in exoplanet detection.
+
+---
 
 ## Project Structure
-```
 exoai-project
 ├── backend
-│   ├── api.py  
-│   ├── requirements.txt          # FastAPI application for backend services
-│   └── README.md       # Documentation for backend setup and usage
+│ ├── api.py
+│ ├── requirements.txt # FastAPI application for backend services
+│ └── README.md # Documentation for backend setup and usage
 ├── frontend
-|   ├── src/
-|   ├── public/
-|   └── package.json
-│   ├── package.json    # Configuration for frontend application
-│   └── README.md       # Documentation for frontend setup and usage
-└── README.md           # Main documentation for the entire project
-```
+│ ├── src/
+│ ├── public/
+│ └── package.json # Configuration for frontend application
+│ └── README.md # Documentation for frontend setup and usage
+└── README.md # Main documentation for the entire project
+
+---
+
+## Live Host
+- **Frontend:** [Live Site](https://exoai-explorer.onrender.com)  
+- **Backend API:** `[api server](https://your-backend-domain.com)
+
+> ⚠️ **Note:** If the host or API is down, please see the **Screenshots** section below to view the project locally or via examples.
+
+---
+
+## Screenshots
+Include screenshots of the application to help users if the live host is unavailable:
+
+- **Frontend Home Page:**  
+  ![Frontend Screenshot](./screenshots/frontend-home.png)
+
+- **API Documentation (/docs):**  
+  ![API Docs Screenshot](./screenshots/api-docs.png)
+
+---
 
 ## Instructions to Run the Project
 
 ### Frontend
 1. Navigate to the frontend directory:
-   ```
    cd frontend
-   ```
-2. Run the frontend application:
-   ```
-   npm run dev
-   ```
-
-### Backend
-1. Navigate to the backend directory:
-   ```
-   cd backend
-   ```
-2. Install required Package from package.json
-   ```
+Install dependencies:
    npm install
-   ```
-
-3. Run the backend application:
-   ```
+Run the frontend application:
+   npm run dev
+Access the app in your browser at http://127.0.0.1:8080 (or the port shown in terminal).
+Backend :
+Navigate to the backend directory:
+   cd backend
+Install required Python packages:
+   pip install -r requirements.txt
+Run the backend API:
    uvicorn api:app --reload
-   ```
+Access API docs in your browser at http://127.0.0.1:8000/docs.
 
-## Dependencies
-- Ensure you have Node.js and npm installed for the frontend.
-- Ensure you have Python and the required libraries installed for the backend, including FastAPI and Uvicorn.
+Dependencies
+Frontend: Node.js and npm.
 
-## Usage
-- Access the frontend application in your web browser after starting the frontend server (default - 127.0.0.1:8080).
-- Use the backend API endpoints to interact with the exoplanet data and AI model performance metrics. Visit `/docs` for API documentation.
+Backend: Python 3.x, FastAPI, Uvicorn, and other packages listed in requirements.txt.
+
+Usage
+Start both frontend and backend servers locally to use the project fully.
+
+Use the backend API endpoints to interact with exoplanet data and AI model performance metrics.
+
+Visit /docs on the backend server to explore available API endpoints.
+
+Notes
+If the live host is unavailable, you can clone the repository and run the project locally using the instructions above.
+
+Screenshots provide a reference for the UI and API functionality when offline or if the live host/API is down.
